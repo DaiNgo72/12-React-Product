@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function ListProduct() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   const getAllProduct = (controller) => {
     fetch("https://apitraining.cybersoft.edu.vn/api/ProductApi/getall", {
@@ -54,7 +55,7 @@ export function ListProduct() {
     })
       .then((r) => {
         console.log("Xoa thanh cong");
-        
+
         getAllProduct();
       })
       .catch((e) => {
@@ -105,7 +106,12 @@ export function ListProduct() {
                     >
                       Delete
                     </button>
-                    <button className="border px-4 py-1 rounded">
+                    <button
+                      onClick={() => {
+                        navigate(`/product/${p.id}`);
+                      }}
+                      className="border px-4 py-1 rounded"
+                    >
                       View Detail
                     </button>
                   </td>
