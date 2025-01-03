@@ -48,3 +48,6 @@ abc();
 # Install yup
 - npm i yup
 - Validate dữ liệu kết hợp với formik
+
+# formik
+- prop name của input là gì thì initialValues của formik phải tương tự, 2 cái phải khớp với nhau.
