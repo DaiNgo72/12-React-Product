@@ -4,6 +4,7 @@ import { ListProduct } from "./pages/list-product";
 import { ProductDetail } from "./pages/product-detail";
 import { Home } from "./pages/home";
 import { BaseTemplate } from "./templates";
+import { NestComponent } from "./pages/nest-component";
 
 export function App() {
   return (
@@ -27,6 +28,10 @@ export function App() {
           {/* /cau-hoi/3/4 ❌ */}
           <Route path=":id" element={<p>child 1</p>}></Route>
         </Route>
+      </Routes>
+
+      <Routes>
+        <Route path="nest-component" element={<NestComponent />}></Route>
       </Routes>
 
       {/* <CauHoi2>
