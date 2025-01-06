@@ -5,6 +5,8 @@ import { ProductDetail } from "./pages/product-detail";
 import { Home } from "./pages/home";
 import { BaseTemplate } from "./templates";
 import { NestComponent } from "./pages/nest-component";
+import { useSelector, useDispatch } from "react-redux";
+import { changeColor } from "./redux/color.slice";
 
 export function App() {
   return (
@@ -18,16 +20,6 @@ export function App() {
           <Route path="list-product" element={<ListProduct />}></Route>
           <Route path="product/:id" element={<ProductDetail />}></Route>
         </Route>
-
-        <Route path="cau-hoi" element={<CauHoi></CauHoi>}>
-          {/* /cau-hoi/:id */}
-          {/* /cau-hoi/1 */}
-          {/* /cau-hoi/2 */}
-          {/* /cau-hoi/3 */}
-
-          {/* /cau-hoi/3/4 ❌ */}
-          <Route path=":id" element={<p>child 1</p>}></Route>
-        </Route>
       </Routes>
 
       <Routes>
@@ -37,30 +29,49 @@ export function App() {
       {/* <CauHoi2>
         <p>Child 2</p>
       </CauHoi2> */}
+
+      <ChangeColor />
     </>
   );
 }
 
-function CauHoi() {
+function ChangeColor() {
+  const color = useSelector((store) => {
+    return store.colorReducer.current;
+  });
+
+  const dispatch = useDispatch();
+
   return (
     <>
-      <h1>Cau hoi</h1>
+      <div
+        className="w-[100px] h-[100px]"
+        style={{
+          backgroundColor: color,
+        }}
+      ></div>
 
-      {/* Render component tai day */}
-      <Outlet />
-    </>
-  );
-}
-
-function CauHoi2({ children }) {
-  return (
-    <>
-      <h1>Cau hoi 2</h1>
-
-      {/* Render component tai day */}
-      {/* <p>Child 2</p> */}
-
-      {children}
+      <button
+        onClick={() => {
+          dispatch(changeColor("red"));
+        }}
+      >
+        red
+      </button>
+      <button
+        onClick={() => {
+          dispatch(changeColor("green"));
+        }}
+      >
+        green
+      </button>
+      <button
+        onClick={() => {
+          dispatch(changeColor("blue"));
+        }}
+      >
+        blue
+      </button>
     </>
   );
 }
